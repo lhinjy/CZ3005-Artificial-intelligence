@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <title>Subway</title>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      h1 {
+        background-color: yellow;
+        display: inline-block;
+        font-size: 3em;
+        margin: 0;
+        padding: 14px;
+      }
+      h3 {
+        color: black;
+        font-size: 20px;
+        margin-top: 3px;
+        text-align: center;
+      }
+      #chatbox {
+        margin-left: 70px;
+        margin-right: 70px;
+        width: 50%;
+        margin-top: 60px;
+      }
+      #userInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+        margin-top: 60px;
+      }
+      #textInput {
+        width: 90%;
+        border: none;
+        border-bottom: 3px solid black;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: center;
+      }
+      .userText {
+        color: white;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: right;
+        line-height: 30px;
+        width: 140%;
+      }
+      .userText span {
+        background-color: #808080;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      .botText {
+        color: white;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText span {
+        background-color: #4169e1;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        margin-top: 60px;
+        border: 1px solid green;
+      }
+      .box {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="boxed">
+      <div>
+        <p>Initialising Subway bot....</p>
+        <div id="loading">
+          <p>please wait</p>
+        </div>
+        <div id="chatbox">
+          <p class="botText">
+            <span>Welcome to subway. Start ordering?</span>
+          </p>
+        </div>
+        <div id="userInput" action="/appp.py" method="GET">
+          <input
+            id="textInput"
+            type="text"
+            name="msg"
+            placeholder="'yes' | 'no' | 'next'"
+          />
+        </div>
+      </div>
+      <script>
+        //start of animation on load
+        $(document).ready(function() {
+          // Hide the div
+          $("#loading").hide();
+          $("#chatbox").hide();
+          // Show the div after timer
+          $("#loading")
+            .delay(200)
+            .fadeIn(150);
+          $("#chatbox")
+            .delay(500)
+            .fadeIn(200);
+        });
+
+        //using hug, get the input and put it as 'msg'
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get", { msg: rawText }).done(function(data) {
+            // to split one message(from python) into different outputs on the html file
+            replyArray = data.split("\n");
+            var botHtml = "";
+            replyArray.forEach(element => {
+              botHtml += '<p class="botText"><span>' + element + "</span></p>";
+            });
+            $("#chatbox").append(botHtml);
+            document
+              .getElementById("userInput")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>
