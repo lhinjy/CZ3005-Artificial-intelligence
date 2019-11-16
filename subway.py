@@ -85,7 +85,6 @@ def order_set(msg, item_title):
 # Input from HTML is saved under 'msg'
 @hug.get()
 def get(msg: hug.types.text):
-
     # Start ordering process
     if (main_counter == 0):
         if (msg == 'yes'):
@@ -129,13 +128,13 @@ def get(msg: hug.types.text):
         return (
             'meal chosen = {}\n bread chosen = {}\nmeat chosen = {}\nveggie chosen = {}\nsauce chosen = {}\n top up chosen = {} \n side chosen = {}\n Thank you and have a nice day \n Restart the server for a new order'
             .format(
-                list(prolog.query('meal_chosen(X)'))[0]['X'],
-                list(prolog.query('bread_chosen(X)'))[0]['X'],
-                list(prolog.query('meat_chosen(X)'))[0]['X'],
-                list(prolog.query('veggie_chosen(X)'))[0]['X'],
-                list(prolog.query('sauce_chosen(X)'))[0]['X'],
-                list(prolog.query('topup_chosen(X)'))[0]['X'],
-                list(prolog.query('side_chosen(X)'))[0]['X']))
+                list(prolog.query('show_meal(X)'))[0]['X'],
+                list(prolog.query('show_bread(X)'))[0]['X'],
+                list(prolog.query('show_meat(X)'))[0]['X'],
+                list(prolog.query('show_veggie(X)'))[0]['X'],
+                list(prolog.query('show_sauce(X)'))[0]['X'],
+                list(prolog.query('show_topup(X)'))[0]['X'],
+                list(prolog.query('show_side(X)'))[0]['X']))
 
     else:
         return error_input()
