@@ -33,11 +33,14 @@ def reset_second():
     global item_counter
     item_counter = 0
 
+#text
+def item_text(item_title, item):
+    return ('{} : Do you want {} ?'.format(item_title,item))
 
 # Text
 def next_step(item_title):
     return (
-        "Alright! {} has been taken note of. \nPlease tell us 'Next' when you are ready for the next step"
+        "Alright! {} has been taken note of. \nPlease tell us 'next' when you are ready for the next step"
         .format(item_title))
 
 
@@ -68,7 +71,7 @@ def order_set(msg, item_title):
 
     if (msg == 'next' or msg == 'no'):
         second_counter()
-        return new_item
+        return item_text(item_title,new_item)
 
     elif (msg == 'yes'):
         # Due to the structure of this python file
