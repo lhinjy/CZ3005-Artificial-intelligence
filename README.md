@@ -14,4 +14,4 @@ Install [Hug](https://www.hug.rest/website/quickstart)
 
 
 
-[example](https://img.youtu.be/DFoHx06epk0/hqdefault.jpg)
+[example](https://youtu.be/DFoHx06epk0)
