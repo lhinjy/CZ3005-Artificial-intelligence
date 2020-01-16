@@ -10,3 +10,8 @@ Install [PySwip](https://github.com/yuce/pyswip)
 Install [Hug](https://www.hug.rest/website/quickstart)
 
 ```hug -f subway.py```
+
+
+
+
+[example](https://img.youtu.be/DFoHx06epk0/hqdefault.jpg)
